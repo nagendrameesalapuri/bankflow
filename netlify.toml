@@ -1,0 +1,11 @@
+[build]
+  command = "npm ci && npm run build --workspace frontend"
+  publish = "frontend/dist"
+
+# BankFlow is a client-side-routed React SPA (React Router) - without this,
+# a direct visit or refresh on any route other than "/" (e.g. /dashboard)
+# would 404 instead of loading the app and letting the router take over.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

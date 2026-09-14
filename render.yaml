@@ -1,0 +1,43 @@
+services:
+  - type: web
+    name: bankflow-backend
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npm run build --workspace backend
+    startCommand: npm run start --workspace backend
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 4000
+      # Set this to your deployed frontend URL after creating the Vercel
+      # project, e.g. https://bankflow.vercel.app (no trailing slash).
+      - key: CORS_ORIGIN
+        sync: false
+      # Paste the connection string from Neon/Supabase/etc. here.
+      - key: DATABASE_URL
+        sync: false
+      - key: DATABASE_SSL
+        value: "true"
+      - key: CROSS_SITE_COOKIES
+        value: "true"
+      - key: AUTO_MIGRATE
+        value: "true"
+      - key: AUTO_SEED_IF_EMPTY
+        value: "true"
+      - key: JWT_ACCESS_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: JWT_ACCESS_EXPIRES_IN
+        value: 15m
+      - key: JWT_REFRESH_EXPIRES_IN
+        value: 7d
+      - key: OTP_EXPIRES_IN_SECONDS
+        value: "120"
+      - key: OTP_LENGTH
+        value: "6"
+      - key: LOGIN_MAX_ATTEMPTS
+        value: "5"
+      - key: LOGIN_LOCKOUT_MINUTES
+        value: "15"

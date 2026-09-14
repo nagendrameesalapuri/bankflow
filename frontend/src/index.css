@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-ink-50 text-ink-900 antialiased;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+:focus-visible {
+  outline: 2px solid theme('colors.brand.500');
+  outline-offset: 2px;
+}
+
+::selection {
+  background-color: theme('colors.brand.200');
+  color: theme('colors.brand.950');
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-all duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn text-white shadow-glow hover:brightness-110 active:brightness-95;
+    background-image: theme('backgroundImage.brand-gradient');
+  }
+  .btn-secondary {
+    @apply btn border border-ink-200 bg-white text-ink-800 hover:border-brand-300 hover:bg-brand-50 hover:text-brand-700;
+  }
+  .btn-danger {
+    @apply btn bg-gradient-to-br from-rose-600 to-red-600 text-white shadow-sm hover:brightness-110;
+  }
+  .btn-ghost {
+    @apply btn text-ink-600 hover:bg-ink-100;
+  }
+  .card {
+    @apply rounded-2xl border border-ink-100 bg-white p-5 shadow-card transition-shadow;
+  }
+  .input {
+    @apply w-full rounded-lg border border-ink-200 bg-white px-3 py-2.5 text-sm text-ink-900 placeholder:text-ink-400 transition-colors focus-visible:border-brand-500;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-ink-700;
+  }
+  .field-error {
+    @apply mt-1 text-xs font-medium text-rose-600;
+  }
+  .badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold;
+  }
+  .stat-tile {
+    @apply relative overflow-hidden rounded-2xl border border-white/10 p-5 text-white shadow-card-lg;
+  }
+  .section-eyebrow {
+    @apply text-xs font-bold uppercase tracking-wider text-brand-600;
+  }
+}
