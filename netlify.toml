@@ -1,5 +1,8 @@
 [build]
-  command = "npm ci && npm run build --workspace frontend"
+  # --include=dev: Netlify also sets NODE_ENV=production during builds,
+  # which makes npm skip devDependencies by default - vite, typescript, and
+  # the Tailwind toolchain all live there and are required to build.
+  command = "npm ci --include=dev && npm run build --workspace frontend"
   publish = "frontend/dist"
 
 # BankFlow is a client-side-routed React SPA (React Router) - without this,
