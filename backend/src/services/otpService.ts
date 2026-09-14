@@ -30,7 +30,7 @@ export async function issueOtp(userId: string, purpose: OtpPurpose, context: Rec
   return {
     otpId: otp.id,
     expiresInSeconds: env.otpExpiresInSeconds,
-    devOtp: env.isProduction ? undefined : code,
+    devOtp: env.exposeDevOtp ? code : undefined,
   };
 }
 

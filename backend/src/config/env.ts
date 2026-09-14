@@ -51,6 +51,13 @@ export const env = {
   // where `npm run db:migrate` / `npm run db:seed` are run explicitly.
   autoMigrate: (process.env.AUTO_MIGRATE ?? 'false').toLowerCase() === 'true',
   autoSeedIfEmpty: (process.env.AUTO_SEED_IF_EMPTY ?? 'false').toLowerCase() === 'true',
+
+  // This app never wires up a real SMS/email provider - OTPs only ever exist
+  // to be echoed back to the caller (API response / dev tools) for
+  // automation and demo purposes. Defaults to true so a production deploy
+  // (NODE_ENV=production) doesn't silently lock everyone out of OTP-gated
+  // flows with no way to see the code. Set EXPOSE_DEV_OTP=false to hide it.
+  exposeDevOtp: (process.env.EXPOSE_DEV_OTP ?? 'true').toLowerCase() === 'true',
 };
 
 export const isDevTool = !env.isProduction;
