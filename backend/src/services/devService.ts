@@ -1,14 +1,7 @@
 import * as chaosService from './chaosService';
-
-// database/seeds/seed.ts lives outside backend/src's rootDir, so it's loaded
-// via plain require() (typed manually) rather than a static import - that
-// keeps it out of tsc's rootDir graph while tsx/node resolve it fine at
-// runtime relative to this compiled file's directory.
-type SeedModule = { seed: () => Promise<void> };
+import { seed } from '../db/seed';
 
 export async function resetDemoEnvironment(): Promise<void> {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const { seed } = require('../../../database/seeds/seed') as SeedModule;
   await seed();
   await chaosService.resetAllChaosRules();
 }

@@ -4,6 +4,7 @@ import { env } from './config/env';
 import { logger } from './config/logger';
 import { initPool, getPool } from './db/pool';
 import { runMigrations } from './db/runMigrations';
+import { seed } from './db/seed';
 import { setupSocket } from './sockets/setupSocket';
 
 async function main() {
@@ -20,8 +21,6 @@ async function main() {
     const { rows } = await getPool().query<{ count: string }>('SELECT COUNT(*) FROM users').catch(() => ({ rows: [{ count: '0' }] }));
     if (Number(rows[0]?.count ?? 0) === 0) {
       logger.info('Database is empty - running initial seed...');
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const { seed } = require('../../database/seeds/seed') as { seed: () => Promise<void> };
       await seed();
     }
   }
