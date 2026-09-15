@@ -4,10 +4,12 @@ import cors from 'cors';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import pinoHttp from 'pino-http';
+import swaggerUi from 'swagger-ui-express';
 import { env } from './config/env';
 import { logger } from './config/logger';
 import { apiLimiter } from './middleware/rateLimiters';
 import { notFoundHandler, errorHandler } from './middleware/errorMiddleware';
+import { openApiSpec } from './docs/openapi';
 
 import authRoutes from './routes/authRoutes';
 import accountRoutes from './routes/accountRoutes';
@@ -38,6 +40,9 @@ export function createApp() {
   app.use('/uploads', express.static(path.resolve(__dirname, '../uploads')));
 
   app.get('/health', (_req, res) => res.status(200).json({ status: 'ok', demo: 'BankFlow - fictional demo bank' }));
+
+  app.get('/api/docs.json', (_req, res) => res.status(200).json(openApiSpec));
+  app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(openApiSpec, { customSiteTitle: 'BankFlow API Docs' }));
 
   app.use('/api/auth', authRoutes);
   app.use('/api/accounts', accountRoutes);

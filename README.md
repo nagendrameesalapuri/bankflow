@@ -132,6 +132,8 @@ The seed script also creates 7 additional fictional customers (`customer02`–`c
 
 All endpoints are namespaced under `/api`. Full request/response shapes are best explored live via the in-app **API Testing Lab** (`/dev/api-lab`, admin-only), which lets you fire real requests and inspect status code + timing + payload.
 
+**Interactive OpenAPI docs:** every endpoint below is also documented as a full OpenAPI 3.0 spec with request/response schemas, served by the backend itself — open **`/api/docs`** for the Swagger UI (try-it-out included; paste a bearer token from `/api/auth/login` via the "Authorize" button), or fetch the raw spec at **`/api/docs.json`** for import into Postman/Insomnia.
+
 <details>
 <summary>Auth — <code>/api/auth</code></summary>
 
