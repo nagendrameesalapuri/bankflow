@@ -45,6 +45,7 @@ const ChallengeLabPage = lazy(() => import('./pages/dev/ChallengeLabPage'));
 
 const NotAuthorizedPage = lazy(() => import('./pages/NotAuthorizedPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const RegressionPage = lazy(() => import('./pages/RegressionPage'));
 
 function PageFallback() {
   return (
@@ -62,6 +63,7 @@ export default function App() {
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route path="/policy" element={<BankPolicyPage />} />
+        <Route path="/regression" element={<RegressionPage />} />
         <Route path="/embedded/otp-verify" element={<OtpFramePage />} />
         <Route path="/not-authorized" element={<NotAuthorizedPage />} />
 
